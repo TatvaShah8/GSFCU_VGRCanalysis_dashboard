@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSFC University VGRC 26| Analytics Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Dark Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="brand-info">
+                    <h2>GSFC University VGRC 26</h2>
+                    <span>ANALYTICS ENGINE</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <span class="nav-label">Social Media Analytics</span>
+                <nav id="navMenu">
+                    <button class="nav-item active" data-target="instagram"><i class="fa-brands fa-instagram"></i> Instagram Media</button>
+                    <button class="nav-item" data-target="demographics" style="padding-left: 32px; font-size: 11px; margin-top: -6px;"><i class="fa-solid fa-person-half-dress"></i>Audience demographics</button>
+                    <button class="nav-item" data-target="facebook"><i class="fa-brands fa-facebook"></i> Facebook Insights</button>
+                    <button class="nav-item" data-target="linkedin"><i class="fa-brands fa-linkedin"></i> LinkedIn Metrics</button>
+                    <button class="nav-item" data-target="pr_influencers"><i class="fa-solid fa-user-check"></i>X</button>
+                    <button class="nav-item" data-target="third_party_reels"><i class="fa-solid fa-clapperboard"></i>Others(Repost/YouTube)</button>
+                    
+                    <span class="nav-label mt-4">Media Coverage Analytics</span>
+                    <button class="nav-item" data-target="pr_mentions"><i class="fa-solid fa-chart-pie"></i> Mentions by Media</button>
+                    <button class="nav-item" data-target="print_media"><i class="fa-solid fa-newspaper"></i> Print Media Coverage</button>
+                    <button class="nav-item" data-target="electronic_news"><i class="fa-solid fa-tv"></i> Electronic News</button>
+
+                    <span class="nav-label mt-4">Website AnalyticsL</span>
+                    <button class="nav-item" data-target="web_overview"><i class="fa-solid fa-globe"></i> Traffic Overview</button>
+                    <button class="nav-item" data-target="web_channels"><i class="fa-solid fa-circle-nodes"></i> Acq. Channels</button>
+                    <button class="nav-item" data-target="web_cities"><i class="fa-solid fa-location-dot"></i> City Breakdown</button>
+                    <button class="nav-item" data-target="web_tech"><i class="fa-solid fa-laptop-code"></i> Technology & OS</button>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <p>Vibrant Gujarat Regional Conferences 2026</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-view">
+            
+            <header class="top-header">
+                <div>
+                    <h1 id="pageTitle">Facebook Performance Hub</h1>
+                    <p class="subtitle">Granular social media data explorer and reporting matrix</p>
+                </div>
+                <div class="controls" id="filterControls">
+                    <label>ANALYZE CRITERIA:</label>
+                    <select id="metricSelector">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+            </header>
+
+            <!-- KPI Row -->
+            <div class="kpi-row" id="kpiCards">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Single Chart Area (Standard) -->
+            <div class="chart-panel" id="chartPanel">
+                <div class="panel-header">
+                    <div>
+                        <h3 id="chartHeading">Reach Distribution Array</h3>
+                        <p>Horizontal performance ranking of campaign publications</p>
+                    </div>
+                    <span class="tag">Top Results</span>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Multi Pie Chart Area (For Print Media) -->
+            <div class="multi-chart-panel" id="multiChartPanel" style="display: none;">
+                <div class="panel-header">
+                    <div>
+                        <h3>Print Media Categorization</h3>
+                        <p>Absolute publication counts across demographics</p>
+                    </div>
+                </div>
+                <div class="pie-grid">
+                    <div class="pie-container">
+                        <h4>By Language</h4>
+                        <div style="position: relative; height: 250px;"><canvas id="pieLanguage"></canvas></div>
+                    </div>
+                    <div class="pie-container">
+                        <h4>By Region</h4>
+                        <div style="position: relative; height: 250px;"><canvas id="pieReach"></canvas></div>
+                    </div>
+                    <div class="pie-container">
+                        <h4>By City</h4>
+                        <div style="position: relative; height: 250px;"><canvas id="pieCity"></canvas></div>
+                    </div>
+                    <div class="pie-container">
+                        <h4>By Appeared In</h4>
+                        <div style="position: relative; height: 250px;"><canvas id="pieMention"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Pie Chart Area (For Electronic Media) -->
+            <div class="chart-panel" id="singlePiePanel" style="display: none; margin-top: 32px; border-top: 4px solid #10b981;">
+                <div class="panel-header">
+                    <div>
+                        <h3>University Mention Distribution</h3>
+                        <p>Absolute categorization of electronic media mentions</p>
+                    </div>
+                </div>
+                
+                <div style="position: relative; height: 350px; width: 100%; max-width: 500px; margin: 0 auto;">
+                    <canvas id="elecPie"></canvas>
+                </div>
+            </div>
+
+            <!-- Tabular View -->
+            <div class="table-panel" id="tablePanel" style="display: none; margin-top: 32px;">
+                <div class="panel-header">
+                    <div>
+                        <h3 id="tableHeading">Detailed Granular Breakdown</h3>
+                        <p>Comprehensive verification log and parameters</p>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="dataTable" style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <!-- Populated by JS -->
+                    </table>
+                </div>
+            </div>
+
+            
+
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
